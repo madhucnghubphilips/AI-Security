@@ -12,5 +12,6 @@ This is the repository for the OWASP Top 10 LLM, Hand on Experience and Mitigati
 ![platform](https://img.shields.io/badge/Private-Repo-purple)
 ![platform](https://img.shields.io/badge/Archive-Repo-green)
 
-<img align="right"  src="https://github.com/madhucnghubphilips/Shift-Left-Security-strategy/blob/main/Resources/DevSecOps.png" />
+<img align="center" height="500" width="500" src="https://github.com/madhucnghubphilips/AI-Security/blob/main/Resources/Logo.png" />
+
 
