@@ -38,7 +38,9 @@ Enable secure AI innovation across the SDLC
 7.  LLM07 - System Prompt Leakage
 8.  LLM08 - Vector and Embedding Weaknesses
 9.  LLM09 - Misinformation 
-10. LLM10 - Unbounded Consumption 
+10. LLM10 - Unbounded Consumption
+
+<h1 align="center"><font face="Arial">How LLM Works</font></h1>
 
 In today’s AI-driven world, securing LLM applications is no longer optional — it is a critical business, privacy, and operational requirement. Organizations that proactively adopt AI Security, governance, and secure AI engineering practices will be better positioned to innovate safely, protect sensitive data, and maintain customer trust.
 
