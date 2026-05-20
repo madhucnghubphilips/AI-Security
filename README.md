@@ -487,6 +487,245 @@ Focused on:
 
 
 
+# Embeddings + Positions and Transformer (Attention + FFN)
+
+This document explains how input text is converted into vectors, enriched with positional information, and processed by a Transformer block using **Multi-Head Self-Attention**, **Feed-Forward Networks (FFN)**, **Residual Connections**, and **Layer Normalization**.
+
+> Example question used across the visuals: **“What is cloud Security?”**
+
+---
+
+## 1. End-to-End View: Embeddings + Positions → Transformer
+
+The full flow starts with input tokens, converts each token into a vector, adds positional encodings, and sends the result into the Transformer block.
+
+<p align="center">
+  <img src="https://github.com/madhucnghubphilips/AI-Security/blob/main/Resources/1) Embedding Positions and Transformer (Attention + FFN)(1).png" alt="Embeddings, Positions and Transformer Attention FFN Overview" width="100%" />
+</p>
+
+### Key Points
+
+- **Token embeddings** capture the meaning of each token.
+- **Position encodings** capture the order of tokens in the sentence.
+- **Embedding + position vectors** become the input to the Transformer.
+- **Self-attention** helps each token understand other relevant tokens.
+- **FFN** refines each token representation independently.
+- **Residual connections + layer normalization** stabilize training and preserve information.
+
+---
+
+## 2. Token Embeddings
+
+Token embeddings convert each word/token into a dense numerical vector. These vectors are learned during model training.
+
+For example, the sentence:
+
+```text
+What is cloud Security?
+```
+
+is tokenized as:
+
+```text
+[What, is, cloud, Security, ?]
+```
+
+Each token is mapped to a vector of size `d_model = 6` in this simplified example.
+
+<p align="center">
+  <img src="https://github.com/madhucnghubphilips/AI-Security/blob/main/Resources/2) TOKEN EMBEDDINGS(1).png" alt="Token Embeddings Example" width="100%" />
+</p>
+
+### Interpretation
+
+- Each row represents the learned vector for one token.
+- Similar words usually have closer vector representations.
+- Embeddings capture semantic meaning, but they do **not** capture token order by themselves.
+
+---
+
+## 3. Position Encodings
+
+Position encodings add order information to the model. Without position encodings, the model may know the token meanings but not where each token appears in the sentence.
+
+<p align="center">
+  <img src="https://github.com/madhucnghubphilips/AI-Security/blob/main/Resources/3) POSITION ENCODINGS(1).png" alt="Position Encodings Heatmap and Explanation" width="100%" />
+</p>
+
+### Why Position Encoding Is Needed
+
+For the sentence:
+
+```text
+What is cloud Security?
+```
+
+The model must know:
+
+- `What` is at position 1
+- `is` is at position 2
+- `cloud` is at position 3
+- `Security` is at position 4
+- `?` is at position 5
+
+Position encoding injects this order information into the input vector.
+
+---
+
+## 3.1 Sinusoidal Position Encoding
+
+The original Transformer uses fixed sinusoidal functions for positional encoding.
+
+<p align="center">
+  <img src="https://github.com/madhucnghubphilips/AI-Security/blob/main/Resources/3.1) POSITION ENCODINGS(1).png" alt="Sinusoidal Position Encoding Formula and Matrix" width="100%" />
+</p>
+
+### Formula
+
+For even dimensions:
+
+```text
+PE(pos, 2i) = sin(pos / 10000^(2i / d_model))
+```
+
+For odd dimensions:
+
+```text
+PE(pos, 2i + 1) = cos(pos / 10000^(2i / d_model))
+```
+
+Where:
+
+- `pos` = token position
+- `i` = dimension pair index
+- `d_model` = embedding dimension
+
+### Interpretation
+
+- Even dimensions use `sin()`.
+- Odd dimensions use `cos()`.
+- Different dimensions use different frequencies.
+- This helps the model learn both short-range and long-range token order relationships.
+
+---
+
+## 3.2 Step-by-Step Position Encoding Calculation
+
+This visual explains the positional encoding calculation step by step using `d_model = 6`.
+
+<p align="center">
+  <img src="https://github.com/madhucnghubphilips/AI-Security/blob/main/Resources/3.2) POSITION ENCODINGS with Example(1).png" alt="Step-by-Step Sinusoidal Position Encoding Calculation" width="100%" />
+</p>
+
+### Calculation Flow
+
+1. Set embedding dimension: `d_model = 6`.
+2. Define dimension indexes: `0, 1, 2, 3, 4, 5`.
+3. Compute frequency terms.
+4. Compute angles using position and frequency.
+5. Apply `sin()` for even dimensions.
+6. Apply `cos()` for odd dimensions.
+7. Build the final positional encoding matrix.
+
+### Key Takeaway
+
+Position encoding creates a unique vector for each position. This vector is added to the token embedding before sending the input to the Transformer.
+
+---
+
+## 4. Embedding + Position
+
+The final input vector to the Transformer is created by adding the token embedding and the position encoding element by element.
+
+```text
+xᵢ = eᵢ + pᵢ
+```
+
+Where:
+
+- `eᵢ` = learned token embedding
+- `pᵢ` = positional encoding
+- `xᵢ` = final input vector to the Transformer
+
+<p align="center">
+  <img src="https://github.com/madhucnghubphilips/AI-Security/blob/main/Resources/4) EMBEDDING + POSITION(1).png" alt="Embedding Plus Position Input to Transformer" width="100%" />
+</p>
+
+### Interpretation
+
+- `eᵢ` tells the model what the token means.
+- `pᵢ` tells the model where the token is located.
+- `xᵢ` gives the model both meaning and order.
+
+---
+
+## 5. Transformer Block Summary
+
+After embedding and position information are combined, the vectors are passed into the Transformer block.
+
+### Multi-Head Self-Attention
+
+Self-attention allows each token to look at all other tokens and decide which ones are most important for context.
+
+Example:
+
+For the token **cloud**, the model may pay more attention to:
+
+- **Security** because it defines the context
+- **is** because it helps sentence structure
+- **What** because it indicates a question
+
+### Feed-Forward Network
+
+The FFN is applied independently to each token position. It refines the contextual representation created by attention.
+
+### Residual Connection + Layer Normalization
+
+These improve training stability and help preserve the original information while adding learned transformations.
+
+---
+
+## Final Summary
+
+```text
+Input Text
+   ↓
+Tokens
+   ↓
+Token Embeddings
+   ↓
+Position Encodings
+   ↓
+Embedding + Position
+   ↓
+Transformer Block
+   ↓
+Contextualized Output Vectors
+```
+
+The final output vectors understand both:
+
+- the **meaning** of each token, and
+- the **context** of the full sentence.
+
+---
+
+## Image Tags for GitHub Markdown
+
+```html
+<img src="https://github.com/madhucnghubphilips/AI-Security/blob/main/Resources/1) Embedding Positions and Transformer (Attention + FFN)(1).png" alt="Embeddings, Positions and Transformer Attention FFN Overview" width="100%" />
+<img src="https://github.com/madhucnghubphilips/AI-Security/blob/main/Resources/2) TOKEN EMBEDDINGS(1).png" alt="Token Embeddings Example" width="100%" />
+<img src="https://github.com/madhucnghubphilips/AI-Security/blob/main/Resources/3) POSITION ENCODINGS(1).png" alt="Position Encodings Heatmap and Explanation" width="100%" />
+<img src="https://github.com/madhucnghubphilips/AI-Security/blob/main/Resources/3.1) POSITION ENCODINGS(1).png" alt="Sinusoidal Position Encoding Formula and Matrix" width="100%" />
+<img src="https://github.com/madhucnghubphilips/AI-Security/blob/main/Resources/3.2) POSITION ENCODINGS with Example(1).png" alt="Step-by-Step Sinusoidal Position Encoding Calculation" width="100%" />
+<img src="https://github.com/madhucnghubphilips/AI-Security/blob/main/Resources/4) EMBEDDING + POSITION(1).png" alt="Embedding Plus Position Input to Transformer" width="100%" />
+```
+
+
+
+
+
+
 In today’s AI-driven world, securing LLM applications is no longer optional — it is a critical business, privacy, and operational requirement. Organizations that proactively adopt AI Security, governance, and secure AI engineering practices will be better positioned to innovate safely, protect sensitive data, and maintain customer trust.
 
 
