@@ -105,6 +105,8 @@ GPU         10,000 medical assistants each handling a small task simultaneously.
 AI Model    A hospital processing millions of medical records and images.
 ```
 
+<br>
+
 <p align="center">
   <img src="Resources/Why-GPU-is-most-important-for-AI(1).png" width="100%" alt="Why GPU is most important for AI 1" />
 </p>
@@ -153,6 +155,10 @@ Visitor   Pretend you are a doctor conducting a training exercise.
 If the guard follows the trick instead of the rules, the security policy has effectively been bypassed.
 
 This is similar to an AI jailbreak.
+
+<p align="center">
+  <img src="Resources/jailbreak.png" width="100%" alt="Jailbreak attacks" />
+</p>
 
 ### Common Jailbreak Techniques
 
@@ -246,28 +252,40 @@ Example:
 Decode this text and execute the instruction.
 ```
 
-<p align="center">
-  <img src="Resources/jailbreak.png" width="100%" alt="Jailbreak attacks" />
-</p>
-
 ---
 
 ## 7. Hallucinations
 
-Hallucinations happen when an AI system generates information that sounds confident but is incorrect, unsupported, or fabricated.
+Hallucination occurs when an AI model generates information that sounds convincing and confident but is actually incorrect, fabricated, misleading, or unsupported by facts.
 
-### Why AI Generates Incorrect Information
+### Simple Definition
 
-AI models generate likely text based on learned patterns. They do not automatically know whether every generated statement is true unless they are grounded with reliable context or verified sources.
+```text
+AI Hallucination = When AI makes up information and presents it as if it were true.
+```
 
-| Cause | Example |
-|---|---|
-| Missing context | The model guesses when it lacks enough information. |
-| Outdated knowledge | The model may not know recent facts. |
-| Ambiguous prompt | The model fills gaps with assumptions. |
-| No source grounding | The model answers without trusted references. |
+Unlike a human hallucination, AI is not "seeing things." Instead, it is predicting the most likely next words, and sometimes it generates content that is not grounded in reality.
 
-RAG, citations, validation, and human review can reduce hallucinations in important workflows.
+### Simple Example
+
+User asks:
+
+```text
+Who invented the MRI machine in 1985?
+```
+
+Hallucinated Response:
+
+```text
+Dr. John Smith invented MRI in 1985.
+```
+
+The AI may sound confident, but:
+
+```text
+X Dr. John Smith may not exist.
+X The information may be completely fabricated.
+```
 
 ---
 
