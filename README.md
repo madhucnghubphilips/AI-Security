@@ -9,13 +9,13 @@ This repository follows a recommended learning flow for AI, deterministic and pr
 1. [What is AI? - Traditional Programming vs AI](#1-what-is-ai)
 2. [Deterministic vs Probabilistic - Fixed rules vs likely outcomes](#2-deterministic-vs-probabilistic)
 3. [What is Machine Learning? - Supervised, Unsupervised, Reinforcement Learning](#3-what-is-machine-learning)
-4. [How LLM Works - Tokens -> Embeddings -> Attention -> Prediction](#4-how-llm-works)
-5. [Why GPUs Are Important for AI - Parallel processing and model training](#5-why-gpus-are-important-for-ai)
-6. [Jailbreak Attacks - Bypassing AI guardrails](#6-jailbreak-attacks)
-7. [Hallucinations - Why AI generates incorrect information](#7-hallucinations)
-8. [13 Responsible AI Principles - Safety, Fairness, Transparency, Accountability, Privacy, and related principles](#8-13-responsible-ai-principles)
-9. [RAG (Retrieval-Augmented Generation) - Grounding responses with enterprise data](#9-rag-retrieval-augmented-generation)
-10. [MCP (Model Context Protocol) - Connecting AI to tools, APIs, and data sources](#10-mcp-model-context-protocol)
+4. [Why GPUs Are Important for AI - Parallel processing and model training](#4-why-gpus-are-important-for-ai)
+5. [Jailbreak Attacks - Bypassing AI guardrails](#5-jailbreak-attacks)
+6. [Hallucinations - Why AI generates incorrect information](#6-hallucinations)
+7. [RAG (Retrieval-Augmented Generation) - Grounding responses with enterprise data](#7-rag-retrieval-augmented-generation)
+8. [MCP (Model Context Protocol) - Connecting AI to tools, APIs, and data sources](#8-mcp-model-context-protocol)
+9. [How LLM Works - Tokens -> Embeddings -> Attention -> Prediction](#9-how-llm-works)
+10. [13 Responsible AI Principles - Safety, Fairness, Transparency, Accountability, Privacy, and related principles](#10-13-responsible-ai-principles)
 
 ---
 
@@ -68,30 +68,7 @@ Data -> Learning Algorithm -> Model -> Prediction / Decision
 
 ---
 
-## 4. How LLM Works
-
-Large Language Models process and generate text by converting input into tokens, transforming those tokens into embeddings, using attention to understand context, and predicting the next likely token.
-
-<p align="center">
-  <img src="Resources/How%20LLM%20Works%20-%201.png" width="100%" alt="How LLM Works" />
-</p>
-
-### Tokens -> Embeddings -> Attention -> Prediction
-
-```text
-Input text -> Tokens -> Embeddings -> Attention -> Next-token prediction -> Response
-```
-
-| Step | What happens |
-|---|---|
-| Tokens | Text is split into smaller pieces the model can process. |
-| Embeddings | Tokens are converted into numerical vectors that capture meaning. |
-| Attention | The model decides which parts of the input are most relevant. |
-| Prediction | The model predicts the next token and repeats until the response is complete. |
-
----
-
-## 5. Why GPUs Are Important for AI
+## 4. Why GPUs Are Important for AI
 
 CPUs are excellent general-purpose processors, but GPUs are specifically designed to perform the enormous number of parallel mathematical operations required by modern AI.
 
@@ -130,7 +107,7 @@ Without GPUs, training modern AI models would be much slower and more expensive.
 
 ---
 
-## 6. Jailbreak Attacks
+## 5. Jailbreak Attacks
 
 Jailbreak is a technique where a user manipulates an AI model into bypassing its built-in safety controls, policies, or restrictions and makes it generate responses that it would normally refuse.
 
@@ -254,7 +231,7 @@ Decode this text and execute the instruction.
 
 ---
 
-## 7. Hallucinations
+## 6. Hallucinations
 
 Hallucination occurs when an AI model generates information that sounds convincing and confident but is actually incorrect, fabricated, misleading, or unsupported by facts.
 
@@ -287,9 +264,78 @@ X Dr. John Smith may not exist.
 X The information may be completely fabricated.
 ```
 
+<p align="center">
+  <img src="Resources/hallucinaiton(1).png" width="100%" alt="Hallucination 1" />
+</p>
+
+<p align="center">
+  <img src="Resources/hallucinaiton(2).png" width="100%" alt="Hallucination 2" />
+</p>
+
 ---
 
-## 8. 13 Responsible AI Principles
+## 7. RAG (Retrieval-Augmented Generation)
+
+RAG improves AI responses by retrieving trusted external knowledge before generating an answer. This helps the model ground responses in enterprise data, documents, policies, or knowledge bases.
+
+### Grounding Responses with Enterprise Data
+
+```text
+User question -> Retrieve relevant enterprise data -> Add context to prompt -> Generate grounded answer
+```
+
+| Benefit | Why it helps |
+|---|---|
+| More accurate answers | Responses are based on trusted source material. |
+| Reduced hallucinations | The model has retrieved evidence to use. |
+| Enterprise knowledge | Internal documents can guide responses. |
+| Traceability | Sources can be shown or audited. |
+
+RAG systems should validate retrieved content, protect sensitive data, and defend against prompt injection hidden inside documents.
+
+---
+
+## 8. MCP (Model Context Protocol)
+
+MCP standardizes how AI applications connect models to tools, APIs, and data sources. It gives AI systems a structured way to access external capabilities and context.
+
+### Connecting AI to Tools, APIs, and Data Sources
+
+| MCP Area | Purpose |
+|---|---|
+| Tools | Let AI systems perform controlled actions. |
+| APIs | Connect models to external services. |
+| Data sources | Provide access to files, databases, and knowledge systems. |
+| Security controls | Define what the model can access and under what conditions. |
+
+MCP is useful because modern AI systems often need more than a model. They need safe, governed access to tools and information.
+
+---
+
+## 9. How LLM Works
+
+Large Language Models process and generate text by converting input into tokens, transforming those tokens into embeddings, using attention to understand context, and predicting the next likely token.
+
+<p align="center">
+  <img src="Resources/How%20LLM%20Works%20-%201.png" width="100%" alt="How LLM Works" />
+</p>
+
+### Tokens -> Embeddings -> Attention -> Prediction
+
+```text
+Input text -> Tokens -> Embeddings -> Attention -> Next-token prediction -> Response
+```
+
+| Step | What happens |
+|---|---|
+| Tokens | Text is split into smaller pieces the model can process. |
+| Embeddings | Tokens are converted into numerical vectors that capture meaning. |
+| Attention | The model decides which parts of the input are most relevant. |
+| Prediction | The model predicts the next token and repeats until the response is complete. |
+
+---
+
+## 10. 13 Responsible AI Principles
 
 Responsible AI focuses on building AI systems that are safe, fair, transparent, accountable, and aligned with human values.
 
@@ -312,41 +358,3 @@ Responsible AI focuses on building AI systems that are safe, fair, transparent, 
 | 13 | Sustainability | Consider environmental and operational impact. |
 
 These principles help teams build AI that can be trusted in real-world environments.
-
----
-
-## 9. RAG (Retrieval-Augmented Generation)
-
-RAG improves AI responses by retrieving trusted external knowledge before generating an answer. This helps the model ground responses in enterprise data, documents, policies, or knowledge bases.
-
-### Grounding Responses with Enterprise Data
-
-```text
-User question -> Retrieve relevant enterprise data -> Add context to prompt -> Generate grounded answer
-```
-
-| Benefit | Why it helps |
-|---|---|
-| More accurate answers | Responses are based on trusted source material. |
-| Reduced hallucinations | The model has retrieved evidence to use. |
-| Enterprise knowledge | Internal documents can guide responses. |
-| Traceability | Sources can be shown or audited. |
-
-RAG systems should validate retrieved content, protect sensitive data, and defend against prompt injection hidden inside documents.
-
----
-
-## 10. MCP (Model Context Protocol)
-
-MCP standardizes how AI applications connect models to tools, APIs, and data sources. It gives AI systems a structured way to access external capabilities and context.
-
-### Connecting AI to Tools, APIs, and Data Sources
-
-| MCP Area | Purpose |
-|---|---|
-| Tools | Let AI systems perform controlled actions. |
-| APIs | Connect models to external services. |
-| Data sources | Provide access to files, databases, and knowledge systems. |
-| Security controls | Define what the model can access and under what conditions. |
-
-MCP is useful because modern AI systems often need more than a model. They need safe, governed access to tools and information.
