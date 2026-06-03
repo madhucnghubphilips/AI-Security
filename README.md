@@ -276,22 +276,60 @@ X The information may be completely fabricated.
 
 ## 7. RAG (Retrieval-Augmented Generation)
 
-RAG improves AI responses by retrieving trusted external knowledge before generating an answer. This helps the model ground responses in enterprise data, documents, policies, or knowledge bases.
+### What is RAG in the AI World?
 
-### Grounding Responses with Enterprise Data
+**RAG (Retrieval-Augmented Generation)** is an AI architecture that combines:
 
-```text
-User question -> Retrieve relevant enterprise data -> Add context to prompt -> Generate grounded answer
-```
+1. **Retrieval** -> Fetch relevant information from trusted sources
+2. **Generation** -> Use an LLM to generate an answer based on the retrieved information
 
-| Benefit | Why it helps |
-|---|---|
-| More accurate answers | Responses are based on trusted source material. |
-| Reduced hallucinations | The model has retrieved evidence to use. |
-| Enterprise knowledge | Internal documents can guide responses. |
-| Traceability | Sources can be shown or audited. |
+### Simple Definition
 
-RAG systems should validate retrieved content, protect sensitive data, and defend against prompt injection hidden inside documents.
+> **RAG = Search First + Generate Later**
+
+Instead of relying only on what the AI learned during training, RAG allows the AI to retrieve fresh, domain-specific, or private information before answering.
+
+<table width="100%">
+  <tr>
+    <td width="49%" valign="top">
+      <h3>Traditional LLM</h3>
+      <pre><code>Question
+   ↓
+LLM
+   ↓
+Answer</code></pre>
+      <p>Problems:</p>
+      <pre><code>❌ Hallucinations
+❌ Outdated knowledge
+❌ No access to internal documents
+❌ Cannot answer company-specific questions</code></pre>
+    </td>
+    <td width="2%"></td>
+    <td width="49%" valign="top">
+      <h3>RAG Approach</h3>
+      <pre><code>Question
+   ↓
+Retrieve Relevant Documents
+   ↓
+Provide Context to LLM
+   ↓
+Generate Grounded Answer</code></pre>
+      <p>Benefits:</p>
+      <pre><code>✅ More accurate
+✅ Less hallucination
+✅ Uses latest information
+✅ Works with private enterprise data</code></pre>
+    </td>
+  </tr>
+</table>
+
+<p align="center">
+  <img src="Resources/rag(1).png" width="100%" alt="RAG 1" />
+</p>
+
+<p align="center">
+  <img src="Resources/rag(2).png" width="100%" alt="RAG 2" />
+</p>
 
 ---
 
