@@ -291,7 +291,7 @@ Instead of relying only on what the AI learned during training, RAG allows the A
 
 <table>
   <tr>
-    <td width="48%" valign="top">
+    <td width="45%" valign="top">
       <h3>Traditional LLM</h3>
       <pre><code>Question
   ↓
@@ -307,8 +307,8 @@ Problems:
 ❌ No internal documents
 ❌ No company-specific answers</code></pre>
     </td>
-    <td width="4%"></td>
-    <td width="48%" valign="top">
+    <td width="10%"></td>
+    <td width="45%" valign="top">
       <h3>RAG Approach</h3>
       <pre><code>Question
   ↓
@@ -326,6 +326,14 @@ Benefits:
     </td>
   </tr>
 </table>
+
+<table>
+<tr>
+<td width="50%" valign="top">
+ 
+
+ 
+---
 
 <p align="center">
   <img src="Resources/rag(1).png" width="100%" alt="RAG 1" />
