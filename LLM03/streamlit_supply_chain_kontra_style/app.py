@@ -286,6 +286,17 @@ STEPS = [
         "Verified components + SBOM + signatures + least privilege + CI gates",
         "A secure supply chain is a chain of evidence: source, dependency, model, data, build, artifact, deployment and runtime controls."
     ),
+    Step(
+        "15. Live Supply Chain Simulation",
+        "Run the release gate simulation against a trusted baseline and a suspicious package update.",
+        "candidate: healthcare-utils-1.2.1\nchanges: new maintainer, lifecycle script, unsigned package, new dependency",
+        "Use the live simulation below to decide which gates block the risky update.",
+        "Keep signature verification, lifecycle script blocking, maintainer validation, and dependency review enabled before release approval.",
+        "",
+        [],
+        "",
+        "The final challenge connects the guided lessons to a live release decision: compare drift, enable gates, review mapped controls, and block unsafe updates."
+    ),
 ]
 
 if "step" not in st.session_state:
@@ -295,152 +306,8 @@ if "score" not in st.session_state:
 if "answered" not in st.session_state:
     st.session_state.answered = {}
 
-st.markdown("""
-<div class='hero'>
-<div class='pill'>Supply Chain Vulnerabilities</div>
-<h1>🧬 LLM03 — Supply Chain Security Lab</h1>
-<p>LLM03 occurs when an AI system trusts a <strong style="color:#ef4444;">compromised or untrusted component</strong> within the AI supply chain.</p>
-<p><b>Topic:</b> OWASP LLM03 / Software Supply Chain Vulnerabilities • <b>Mode:</b> 14 guided steps • <b>Audience:</b> Developers, AppSec, DevSecOps</p>
-<p class='hero-quote'>One poisoned dependency can compromise millions.</p>
-</div>
-""", unsafe_allow_html=True)
 
-with st.sidebar:
-    st.header("📍 Learning Path")
-    completed = len(st.session_state.answered)
-    progress = (completed / len(STEPS))
-    st.progress(progress)
-    st.markdown(
-        f"""
-        <div class="sidebar-stat-grid">
-            <div class="sidebar-stat-card completed">
-                <span class="sidebar-stat-label">Completed</span>
-                <span class="sidebar-stat-value">{completed}/{len(STEPS)}</span>
-            </div>
-            <div class="sidebar-stat-card score">
-                <span class="sidebar-stat-label">Score</span>
-                <span class="sidebar-stat-value">{st.session_state.score}</span>
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-    st.divider()
-    for i, s in enumerate(STEPS):
-        label = f"{'✅' if i in st.session_state.answered else '▫️'} {i+1}. {s.title.split('. ',1)[-1]}"
-        if st.button(label, key=f"nav_{i}", use_container_width=True):
-            st.session_state.step = i
-            st.rerun()
-    st.divider()
-    if st.button("Reset Lab", use_container_width=True):
-        st.session_state.step = 0
-        st.session_state.score = 0
-        st.session_state.answered = {}
-        st.rerun()
-
-step = STEPS[st.session_state.step]
-
-left, right = st.columns([1.35, 1])
-with left:
-    st.markdown(f"<div class='card'><h2>{step.title}</h2><p>{step.scenario}</p></div>", unsafe_allow_html=True)
-    st.markdown("<div class='card bad'><h3>🔴 Vulnerable Setup</h3></div>", unsafe_allow_html=True)
-    st.code(step.vulnerable, language="python")
-    st.markdown(f"<div class='card warn'><h3>🎯 Your Task</h3><p>{step.task}</p></div>", unsafe_allow_html=True)
-
-with right:
-    st.markdown("<div class='card good'><h3>🛡️ Secure Fix</h3></div>", unsafe_allow_html=True)
-    with st.expander("Reveal recommended fix", expanded=False):
-        st.success(step.fix)
-        st.info(step.lesson)
-
-st.subheader("🧪 Interactive Check")
-choice = st.radio(step.quiz, step.options, key=f"quiz_{st.session_state.step}")
-col1, col2, col3 = st.columns([1,1,1])
-with col1:
-    if st.button("Submit Answer", type="primary"):
-        if st.session_state.step not in st.session_state.answered:
-            if choice == step.answer:
-                st.session_state.score += 10
-                st.session_state.answered[st.session_state.step] = True
-                st.success("Correct ✅")
-            else:
-                st.session_state.answered[st.session_state.step] = False
-                st.error(f"Not quite. Correct answer: {step.answer}")
-        else:
-            st.info("Already answered. Use Next Step to continue.")
-with col2:
-    if st.button("Previous Step"):
-        st.session_state.step = max(0, st.session_state.step - 1)
-        st.rerun()
-with col3:
-    if st.button("Next Step"):
-        st.session_state.step = min(len(STEPS)-1, st.session_state.step + 1)
-        st.rerun()
-
-st.divider()
-st.subheader("🔎 Mini Scanner: Supply Chain Red Flags")
-sample = st.text_area("Paste dependency / Docker / CI snippet", value="""pip install my-internal-lib --extra-index-url https://pypi.org/simple
-image: myrepo/ai-app:latest
-echo $API_TOKEN
-curl -s https://example.com/install.sh | bash
-""", height=150)
-
-RULES = [
-    (r"extra-index-url|index-url.*pypi", "Dependency confusion risk: public registry fallback detected."),
-    (r":latest\b", "Non-reproducible artifact: ':latest' tag detected."),
-    (r"echo\s+\$\w*TOKEN|echo\s+\$\w*SECRET|echo\s+\$\w*KEY", "Secret exposure risk: pipeline may print secrets."),
-    (r"curl .*\|\s*bash|wget .*\|\s*sh", "Unverified remote code execution: curl/wget piped to shell."),
-    (r">=|~=|\*", "Floating dependency version detected; consider pinning exact versions and hashes."),
-]
-findings = []
-for pattern, msg in RULES:
-    if re.search(pattern, sample, flags=re.I):
-        findings.append(msg)
-if findings:
-    for f in findings:
-        st.warning(f)
-else:
-    st.success("No simple red flags detected by this demo scanner.")
-
-st.divider()
-st.subheader("📋 Secure Release Checklist")
-checks = [
-    "Approved package registry only",
-    "Pinned versions and checksum/hash verification",
-    "Direct + transitive dependency SCA",
-    "SBOM generated and stored",
-    "Model artifact from approved registry",
-    "Dataset/RAG source provenance validated",
-    "Prompt templates reviewed in source control",
-    "Plugin/tool permissions are least privilege",
-    "CI/CD secrets masked and short-lived",
-    "Build scripts reviewed and hermetic where possible",
-    "Container image pinned by digest and signed",
-    "Admission policy verifies signatures before deploy",
-    "Runtime downloads blocked or strictly approved",
-    "Monitoring detects drift and unauthorized changes",
-]
-selected = st.multiselect("Mark controls implemented", checks)
-st.progress(len(selected)/len(checks))
-if len(selected) == len(checks):
-    st.balloons()
-    st.success("Release gate passed for this lab scenario.")
-elif len(selected) >= 10:
-    st.info("Strong posture. Review remaining gaps before production release.")
-else:
-    st.error("Release gate not ready. Critical controls are still missing.")
-
-report = {
-    "generated_at": datetime.utcnow().isoformat() + "Z",
-    "completed_steps": len(st.session_state.answered),
-    "score": st.session_state.score,
-    "implemented_controls": selected,
-    "findings_from_mini_scanner": findings,
-}
-st.download_button("⬇️ Download Lab Report JSON", json.dumps(report, indent=2), "supply_chain_lab_report.json", "application/json")
-
-if st.session_state.step == len(STEPS) - 1:
-    st.divider()
+def render_live_supply_chain_simulation():
     st.subheader("🧬 Live Supply Chain Simulation")
     st.caption("Inspect a safe local package against a vulnerable update, then turn security gates on and off to see what would be blocked.")
 
@@ -556,3 +423,155 @@ if st.session_state.step == len(STEPS) - 1:
             controls = controls_for_event(event)
             if controls:
                 st.caption("Mapped controls: " + ", ".join(f"{control['id']} {control['name']}" for control in controls))
+
+
+st.markdown("""
+<div class='hero'>
+<div class='pill'>Supply Chain Vulnerabilities</div>
+<h1>🧬 LLM03 — Supply Chain Security Lab</h1>
+<p>LLM03 occurs when an AI system trusts a <strong style="color:#ef4444;">compromised or untrusted component</strong> within the AI supply chain.</p>
+<p><b>Topic:</b> OWASP LLM03 / Software Supply Chain Vulnerabilities • <b>Mode:</b> 15 guided steps • <b>Audience:</b> Developers, AppSec, DevSecOps</p>
+<p class='hero-quote'>One poisoned dependency can compromise millions.</p>
+</div>
+""", unsafe_allow_html=True)
+
+with st.sidebar:
+    st.header("📍 Learning Path")
+    completed = len(st.session_state.answered)
+    progress = (completed / len(STEPS))
+    st.progress(progress)
+    st.markdown(
+        f"""
+        <div class="sidebar-stat-grid">
+            <div class="sidebar-stat-card completed">
+                <span class="sidebar-stat-label">Completed</span>
+                <span class="sidebar-stat-value">{completed}/{len(STEPS)}</span>
+            </div>
+            <div class="sidebar-stat-card score">
+                <span class="sidebar-stat-label">Score</span>
+                <span class="sidebar-stat-value">{st.session_state.score}</span>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    st.divider()
+    for i, s in enumerate(STEPS):
+        label = f"{'✅' if i in st.session_state.answered else '▫️'} {i+1}. {s.title.split('. ',1)[-1]}"
+        if st.button(label, key=f"nav_{i}", use_container_width=True):
+            st.session_state.step = i
+            st.rerun()
+    st.divider()
+    if st.button("Reset Lab", use_container_width=True):
+        st.session_state.step = 0
+        st.session_state.score = 0
+        st.session_state.answered = {}
+        st.rerun()
+
+step = STEPS[st.session_state.step]
+is_live_simulation_step = step.title == "15. Live Supply Chain Simulation"
+
+if is_live_simulation_step:
+    render_live_supply_chain_simulation()
+elif not is_live_simulation_step:
+    left, right = st.columns([1.35, 1])
+    with left:
+        st.markdown(f"<div class='card'><h2>{step.title}</h2><p>{step.scenario}</p></div>", unsafe_allow_html=True)
+        st.markdown("<div class='card bad'><h3>🔴 Vulnerable Setup</h3></div>", unsafe_allow_html=True)
+        st.code(step.vulnerable, language="python")
+        st.markdown(f"<div class='card warn'><h3>🎯 Your Task</h3><p>{step.task}</p></div>", unsafe_allow_html=True)
+
+    with right:
+        st.markdown("<div class='card good'><h3>🛡️ Secure Fix</h3></div>", unsafe_allow_html=True)
+        with st.expander("Reveal recommended fix", expanded=False):
+            st.success(step.fix)
+            st.info(step.lesson)
+
+if not is_live_simulation_step and step.quiz and step.options:
+    st.subheader("🧪 Interactive Check")
+    choice = st.radio(step.quiz, step.options, key=f"quiz_{st.session_state.step}")
+    col1, col2, col3 = st.columns([1,1,1])
+    with col1:
+        if st.button("Submit Answer", type="primary"):
+            if st.session_state.step not in st.session_state.answered:
+                if choice == step.answer:
+                    st.session_state.score += 10
+                    st.session_state.answered[st.session_state.step] = True
+                    st.success("Correct ✅")
+                else:
+                    st.session_state.answered[st.session_state.step] = False
+                    st.error(f"Not quite. Correct answer: {step.answer}")
+            else:
+                st.info("Already answered. Use Next Step to continue.")
+elif is_live_simulation_step:
+    col2, col3 = st.columns([1,1])
+with col2:
+    if st.button("Previous Step"):
+        st.session_state.step = max(0, st.session_state.step - 1)
+        st.rerun()
+with col3:
+    if st.button("Next Step"):
+        st.session_state.step = min(len(STEPS)-1, st.session_state.step + 1)
+        st.rerun()
+
+st.divider()
+st.subheader("🔎 Mini Scanner: Supply Chain Red Flags")
+sample = st.text_area("Paste dependency / Docker / CI snippet", value="""pip install my-internal-lib --extra-index-url https://pypi.org/simple
+image: myrepo/ai-app:latest
+echo $API_TOKEN
+curl -s https://example.com/install.sh | bash
+""", height=150)
+
+RULES = [
+    (r"extra-index-url|index-url.*pypi", "Dependency confusion risk: public registry fallback detected."),
+    (r":latest\b", "Non-reproducible artifact: ':latest' tag detected."),
+    (r"echo\s+\$\w*TOKEN|echo\s+\$\w*SECRET|echo\s+\$\w*KEY", "Secret exposure risk: pipeline may print secrets."),
+    (r"curl .*\|\s*bash|wget .*\|\s*sh", "Unverified remote code execution: curl/wget piped to shell."),
+    (r">=|~=|\*", "Floating dependency version detected; consider pinning exact versions and hashes."),
+]
+findings = []
+for pattern, msg in RULES:
+    if re.search(pattern, sample, flags=re.I):
+        findings.append(msg)
+if findings:
+    for f in findings:
+        st.warning(f)
+else:
+    st.success("No simple red flags detected by this demo scanner.")
+
+st.divider()
+st.subheader("📋 Secure Release Checklist")
+checks = [
+    "Approved package registry only",
+    "Pinned versions and checksum/hash verification",
+    "Direct + transitive dependency SCA",
+    "SBOM generated and stored",
+    "Model artifact from approved registry",
+    "Dataset/RAG source provenance validated",
+    "Prompt templates reviewed in source control",
+    "Plugin/tool permissions are least privilege",
+    "CI/CD secrets masked and short-lived",
+    "Build scripts reviewed and hermetic where possible",
+    "Container image pinned by digest and signed",
+    "Admission policy verifies signatures before deploy",
+    "Runtime downloads blocked or strictly approved",
+    "Monitoring detects drift and unauthorized changes",
+]
+selected = st.multiselect("Mark controls implemented", checks)
+st.progress(len(selected)/len(checks))
+if len(selected) == len(checks):
+    st.balloons()
+    st.success("Release gate passed for this lab scenario.")
+elif len(selected) >= 10:
+    st.info("Strong posture. Review remaining gaps before production release.")
+else:
+    st.error("Release gate not ready. Critical controls are still missing.")
+
+report = {
+    "generated_at": datetime.utcnow().isoformat() + "Z",
+    "completed_steps": len(st.session_state.answered),
+    "score": st.session_state.score,
+    "implemented_controls": selected,
+    "findings_from_mini_scanner": findings,
+}
+st.download_button("⬇️ Download Lab Report JSON", json.dumps(report, indent=2), "supply_chain_lab_report.json", "application/json")

@@ -45,3 +45,4 @@ Use this for internal security awareness, OWASP LLM Top 10 workshops, developer 
 12. SBOM and Provenance Gate
 13. Runtime Drift
 14. Final Fix Challenge
+15. Live Supply Chain Simulation

@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from lab_enhancements import (
     ATTACK_SCENARIOS,
     compare_manifests,
@@ -15,6 +17,23 @@ def test_live_simulation_is_documented_as_fifteenth_challenge():
     assert '"15. Live Supply Chain Simulation"' in app_text
     assert "<b>Mode:</b> 15 guided steps" in app_text
     assert "15. Live Supply Chain Simulation" in readme_text
+
+
+def test_live_simulation_challenge_does_not_render_an_mcq_prompt():
+    app_text = Path("LLM03/streamlit_supply_chain_kontra_style/app.py").read_text(encoding="utf-8")
+    live_step = app_text.split('"15. Live Supply Chain Simulation"', maxsplit=1)[1].split("),", maxsplit=1)[0]
+
+    assert "Which package should pass" not in live_step
+    assert 'st.subheader("🧪 Interactive Check")' in app_text
+    assert "if not is_live_simulation_step and step.quiz and step.options:" in app_text
+
+
+def test_live_simulation_challenge_starts_with_simulation_ui():
+    app_text = Path("LLM03/streamlit_supply_chain_kontra_style/app.py").read_text(encoding="utf-8")
+
+    assert "is_live_simulation_step = step.title == \"15. Live Supply Chain Simulation\"" in app_text
+    assert "if not is_live_simulation_step:" in app_text
+    assert app_text.index("render_live_supply_chain_simulation()") < app_text.index('st.subheader("🔎 Mini Scanner: Supply Chain Red Flags")')
 
 
 def test_compare_manifests_flags_supply_chain_changes():
