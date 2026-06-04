@@ -342,6 +342,14 @@ Nmap Burp Nessus Meta Azure
   <img src="Resources/MCP.png" width="100%" alt="MCP" />
 </p>
 
+This OWASP Top 10 for MCP outlines the most critical security concerns arising in the lifecycle of MCP-enabled systems—spanning from model misbinding, context spoofing, and prompt-state manipulation to insecure memory references and covert channel abuse. These risks are amplified in scenarios involving agentic AI, model chaining, multi-modal orchestration, and dynamic role assignment.
+
+By mapping the top 10 MCP-related vulnerabilities and offering concrete recommendations for secure design, implementation, and auditing practices, this project aims to equip AI developers, ML engineers, and security practitioners with the insights necessary to build context-aware and attack-resilient AI systems. The OWASP MCP Top 10 will serve as a living document, evolving alongside the pace of AI model capability and protocol innovation—anchored in real-world threats, research findings, and industry feedback.
+
+<p align="center">
+  <img src="Resources/mcp-top-10.png" width="100%" alt="MCP Top 10" />
+</p>
+
 ---
 
 ## 9. How LLM Works
