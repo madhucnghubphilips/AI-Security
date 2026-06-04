@@ -356,6 +356,21 @@ By mapping the top 10 MCP-related vulnerabilities and offering concrete recommen
 
 Large Language Models process and generate text by converting input into tokens, transforming those tokens into embeddings, using attention to understand context, and predicting the next likely token.
 
+
+### Tokens -> Embeddings -> Attention -> Prediction
+
+```text
+Input text -> Tokens -> Embeddings -> Attention -> Next-token prediction -> Response
+```
+
+| Step | What happens |
+|---|---|
+| Tokens | Text is split into smaller pieces the model can process. |
+| Embeddings | Tokens are converted into numerical vectors that capture meaning. |
+| Attention | The model decides which parts of the input are most relevant. |
+| Prediction | The model predicts the next token and repeats until the response is complete. |
+
+
 <p align="center">
   <img src="Resources/How%20LLM%20Works%20-%201.png" width="100%" alt="How LLM Works" />
 </p>
@@ -375,19 +390,6 @@ Large Language Models process and generate text by converting input into tokens,
 <p align="center">
   <img src="Resources/How-Predicting-Output-work.png" width="100%" alt="Predicting Output" />
 </p>
-
-### Tokens -> Embeddings -> Attention -> Prediction
-
-```text
-Input text -> Tokens -> Embeddings -> Attention -> Next-token prediction -> Response
-```
-
-| Step | What happens |
-|---|---|
-| Tokens | Text is split into smaller pieces the model can process. |
-| Embeddings | Tokens are converted into numerical vectors that capture meaning. |
-| Attention | The model decides which parts of the input are most relevant. |
-| Prediction | The model predicts the next token and repeats until the response is complete. |
 
 ---
 
