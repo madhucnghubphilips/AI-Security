@@ -375,25 +375,33 @@ Input text -> Tokens -> Embeddings -> Attention -> Next-token prediction -> Resp
   <img src="Resources/How%20LLM%20Works%20-%201.png" width="100%" alt="How LLM Works" />
 </p>
 
-<p align="center">------------------------------------------------------------</p>
+<p align="center">
+  <img src="Resources/border.png" width="100%" alt="Section divider" />
+</p>
 
 <p align="center">
   <img src="Resources/How-Tokanization-and-Embeddings-work.png" width="100%" alt="How Tokenization and Embedding Works" />
 </p>
 
-<p align="center">------------------------------------------------------------</p>
+<p align="center">
+  <img src="Resources/border.png" width="100%" alt="Section divider" />
+</p>
 
 <p align="center">
   <img src="Resources/How-Transformer-Neural-Network.png" width="100%" alt="Transformers and Neural Networks" />
 </p>
 
-<p align="center">------------------------------------------------------------</p>
+<p align="center">
+  <img src="Resources/border.png" width="100%" alt="Section divider" />
+</p>
 
 <p align="center">
   <img src="Resources/How-Attention-Mechanism-work.png" width="100%" alt="Attention Mechanism" />
 </p>
 
-<p align="center">------------------------------------------------------------</p>
+<p align="center">
+  <img src="Resources/border.png" width="100%" alt="Section divider" />
+</p>
 
 <p align="center">
   <img src="Resources/How-Predicting-Output-work.png" width="100%" alt="Predicting Output" />
