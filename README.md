@@ -314,7 +314,7 @@ The chatbot and LLM08 read `OLLAMA_BASE_URL` from the environment. Docker Compos
 
 ### Corporate Certificate Troubleshooting
 
-If Ollama model downloads fail with an error like `tls: failed to verify certificate`, export your corporate root/intermediate CA certificate as a `.crt` file and place it in:
+If Ollama model downloads fail with an error like `tls: failed to verify certificate`, export your corporate root/intermediate CA certificate as a `.crt` or `.cer` file and place it in:
 
 ```text
 docker/ollama/certs/
@@ -328,6 +328,17 @@ docker compose up --build
 ```
 
 The Ollama containers import any `.crt` files from that folder before starting the model server and before pulling models.
+
+For Cisco Umbrella networks, export the `Cisco Umbrella Root CA` certificate from the Windows certificate store and place it in `docker/ollama/certs/`.
+
+If you cannot get the certificate file and need a temporary workaround, you can bypass TLS verification for Ollama model pulls:
+
+```powershell
+$env:OLLAMA_PULL_INSECURE="true"
+docker compose up --build
+```
+
+Use this only on a trusted network. The safer long-term fix is to install the correct corporate CA certificate.
 
  
 ---
