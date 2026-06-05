@@ -95,7 +95,7 @@ section.image h2 {
 </style>
 
 <!-- _class: lead -->
-
+---
 
 # AI Security Learning Notes
 <!--Slide - 1-->
@@ -107,18 +107,17 @@ From AI fundamentals to LLM risks, RAG, MCP, and responsible AI.
 
 ---
 
-##	Topic	Key Focus
-<h3>1.	**🤖 What is AI?**							            Traditional Programming vs AI
-<h3>2.	**🎯 Deterministic vs Probabilistic AI**	  Rules vs Predictions
-<h3>3. **🧠 Machine Learning Fundamentals**		      Supervised, Unsupervised & RL
-<h3>4. **⚡ Why GPUs Matter**						            AI Training & Inference
-<h3>5. **🔓 Jailbreak Attacks**					            Bypassing AI Guardrails
-<h3>6. **🛡️ Guardrails**                            Safety, Security & Control
-<h3>7. **🎭 AI Hallucinations**					            Incorrect AI Responses
-<h3>8. **📖 RAG Fundamentals**					            Enterprise Knowledge Integration
-<h3>9. **🔌 MCP Fundamentals**					            AI + Tools & APIs
-<h3>10. **⚙️ How LLMs Work**						              Tokens → Embeddings → Attention → Prediction
-<h3>11. **✅ Responsible AI**						            Safety, Fairness & Trust
+1.	**🤖 What is AI?**							            Traditional Programming vs AI
+2.	**🎯 Deterministic vs Probabilistic AI**	  Rules vs Predictions
+3. **🧠 Machine Learning Fundamentals**		      Supervised, Unsupervised & RL
+4. **⚡ Why GPUs Matter**						            AI Training & Inference
+5. **🔓 Jailbreak Attacks**					            Bypassing AI Guardrails
+6. **🛡️ Guardrails**                            Safety, Security & Control
+7. **🎭 AI Hallucinations**					            Incorrect AI Responses
+8. **📖 RAG Fundamentals**					            Enterprise Knowledge Integration
+9. **🔌 MCP Fundamentals**					            AI + Tools & APIs
+10. **⚙️ How LLMs Work**						              Tokens → Embeddings → Attention → Prediction
+11. **✅ Responsible AI**						            Safety, Fairness & Trust
 
 ---
 
