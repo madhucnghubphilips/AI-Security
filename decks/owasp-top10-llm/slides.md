@@ -111,8 +111,8 @@ From AI fundamentals to LLM risks, RAG, MCP, and responsible AI.
 2.	**🎯 Deterministic vs Probabilistic AI**	  Rules vs Predictions
 3. **🧠 Machine Learning Fundamentals**		      Supervised, Unsupervised & RL
 4. **⚡ Why GPUs Matter**						            AI Training & Inference
-5. **🛡️ Guardrails**                            Safety, Security & Control
-6. **🔓 Jailbreak Attacks**					            Bypassing AI Guardrails
+5. **🔓 Jailbreak Attacks**					            Bypassing AI Guardrails
+6. **🛡️ Guardrails**                            Safety, Security & Control
 7. **🎭 AI Hallucinations**					            Incorrect AI Responses
 8. **📖 RAG Fundamentals**					            Enterprise Knowledge Integration
 9. **🔌 MCP Fundamentals**					            AI + Tools & APIs
