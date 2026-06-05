@@ -3,6 +3,8 @@ set -eu
 
 echo "Preparing Ollama models..."
 
+/bin/sh /install-certs.sh
+
 ollama pull dolphin-mistral
 ollama create dolphin-ctf -f /models/Modelfile-ctf
 ollama pull nomic-embed-text

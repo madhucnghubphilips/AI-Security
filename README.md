@@ -312,6 +312,23 @@ docker compose down --volumes
 
 The chatbot and LLM08 read `OLLAMA_BASE_URL` from the environment. Docker Compose sets it to `http://ollama:11434`. Local non-Docker runs still default to `http://localhost:11434`.
 
+### Corporate Certificate Troubleshooting
+
+If Ollama model downloads fail with an error like `tls: failed to verify certificate`, export your corporate root/intermediate CA certificate as a `.crt` file and place it in:
+
+```text
+docker/ollama/certs/
+```
+
+Then restart the stack:
+
+```bash
+docker compose down
+docker compose up --build
+```
+
+The Ollama containers import any `.crt` files from that folder before starting the model server and before pulling models.
+
  
 ---
 
