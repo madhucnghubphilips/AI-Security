@@ -10,14 +10,14 @@ size: 16:9
 
 <style>
 section {
-  background: #0b1020;
-  color: #edf2ff;
+  background: #ffffff;
+  color: #111827;
   font-family: "Aptos", "Segoe UI", Arial, sans-serif;
   letter-spacing: 0;
 }
 
 h1, h2, h3 {
-  color: #f7fbff;
+  color: #111827;
   letter-spacing: 0;
 }
 
@@ -34,14 +34,14 @@ p, li, td, th {
 }
 
 strong {
-  color: #7dd3fc;
+  color: #0f4c81;
 }
 
 code, pre {
-  background: rgba(15, 23, 42, 0.78);
-  border: 1px solid rgba(148, 163, 184, 0.24);
+  background: #f8fafc;
+  border: 1px solid #d0d7de;
   border-radius: 6px;
-  color: #e0f2fe;
+  color: #111827;
 }
 
 pre {
@@ -71,12 +71,12 @@ section.lead h1 {
 }
 
 section.lead p {
-  color: #cbd5e1;
+  color: #374151;
   font-size: 1.35rem;
 }
 
 section.image h2 {
-  background: rgba(11, 16, 32, 0.82);
+  background: rgba(255, 255, 255, 0.9);
   border-radius: 6px;
   display: inline-block;
   font-size: 1rem;
@@ -94,8 +94,8 @@ section.image h2 {
 }
 
 .panel {
-  background: rgba(15, 23, 42, 0.58);
-  border: 1px solid rgba(148, 163, 184, 0.24);
+  background: #f8fafc;
+  border: 1px solid #d0d7de;
   border-radius: 8px;
   min-width: 0;
   padding: 0.75rem;
