@@ -96,9 +96,9 @@ section.image h2 {
 </style>
 
 <!-- _class: lead -->
----
 
-# AI Security Learning Notes
+
+# AI Security Learning Hub
 <!--Slide - 1-->
 
 OWASP Top 10 LLM Workshop
