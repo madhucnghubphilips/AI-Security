@@ -49,7 +49,6 @@ The key difference from traditional software:
 ---
 <!-- _class: image -->
 
-## What Is AI?
 
 ![bg contain](../../Resources/What-is-AI.png)
 
@@ -84,7 +83,6 @@ The key difference from traditional software:
 
 <!-- _class: image -->
 
-## Deterministic vs Probabilistic
 
 ![bg contain](../../Resources/deterministic-probabilistic%281%29.png)
 
@@ -92,7 +90,6 @@ The key difference from traditional software:
 
 <!-- _class: image -->
 
-## Probabilistic AI Systems
 
 ![bg contain](../../Resources/deterministic-probabilistic%282%29.png)
 
@@ -112,7 +109,6 @@ Instead of telling the computer exactly what to do, we provide data and let it l
 
 <!-- _class: image -->
 
-## Machine Learning
 
 ![bg contain](../../Resources/What-is-Machine-Learning.png)
 
@@ -120,7 +116,6 @@ Instead of telling the computer exactly what to do, we provide data and let it l
 
 <!-- _class: image -->
 
-## Learning From Data
 
 ![bg contain](../../Resources/What-is-Machine-Learning-2.png)
 
@@ -142,15 +137,12 @@ AI       Large-scale matrix math over massive data
 
 <!-- _class: image -->
 
-## GPUs and AI Workloads
 
 ![bg contain](../../Resources/Why-GPU-is-most-important-for-AI%281%29.png)
 
 ---
 
 <!-- _class: image -->
-
-## Parallel Processing
 
 ![bg contain](../../Resources/Why-GPU-is-most-important-for-AI%282%29.png)
 
@@ -172,7 +164,6 @@ Common patterns:
 
 <!-- _class: image -->
 
-## Jailbreak Example
 
 ![bg contain](../../Resources/jailbreak.png?raw=true)
 
@@ -180,7 +171,6 @@ Common patterns:
 
 <!-- _class: image -->
 
-## Common Jailbreak Types
 
 ![bg contain](../../Resources/common-types-of-jailbreaks.png)
 
@@ -193,6 +183,7 @@ AI Guardrails are the security, safety, and governance controls placed around an
 <!-- _class: image -->
 
 ![bg contain](../../Resources/Guardrails.png)
+
 ---
 
 
@@ -211,7 +202,6 @@ LLMs predict likely tokens. They do not automatically know whether every generat
 
 <!-- _class: image -->
 
-## Hallucination Risk
 
 ![bg contain](../../Resources/hallucinaiton%281%29.png)
 
@@ -219,7 +209,6 @@ LLMs predict likely tokens. They do not automatically know whether every generat
 
 <!-- _class: image -->
 
-## Grounding Matters
 
 ![bg contain](../../Resources/hallucinaiton%282%29.png)
 
@@ -284,7 +273,6 @@ Benefits: accuracy, freshness, enterprise context.
 
 <!-- _class: image -->
 
-## RAG Architecture
 
 ![bg contain](../../Resources/rag%281%29.png)
 
@@ -292,7 +280,6 @@ Benefits: accuracy, freshness, enterprise context.
 
 <!-- _class: image -->
 
-## RAG in Practice
 
 ![bg contain](../../Resources/rag%282%29.png)
 
@@ -314,7 +301,6 @@ It provides a common interface for tool and data access.
 
 <!-- _class: image -->
 
-## MCP Tool Connectivity
 
 ![bg contain](../../Resources/MCP.png)
 
@@ -336,7 +322,6 @@ These risks grow in agentic AI, model chaining, multimodal orchestration, and dy
 
 <!-- _class: image -->
 
-## MCP Top 10
 
 ![bg contain](../../Resources/mcp-top-10.png)
 
@@ -356,7 +341,6 @@ Each generated token becomes part of the next prediction step.
 
 <!-- _class: image -->
 
-## LLM Processing Flow
 
 ![bg contain](../../Resources/How-LLM-Works1.png)
 
@@ -364,7 +348,6 @@ Each generated token becomes part of the next prediction step.
 
 <!-- _class: image -->
 
-## Token Embeddings
 
 ![bg contain](../../Resources/How-LLM-Works2.png)
 
@@ -372,7 +355,6 @@ Each generated token becomes part of the next prediction step.
 
 <!-- _class: image -->
 
-## Position Encodings
 
 ![bg contain](../../Resources/How-LLM-Works3.png)
 
@@ -380,14 +362,13 @@ Each generated token becomes part of the next prediction step.
 
 <!-- _class: image -->
 
-## Attention Mechanism
 
 ![bg contain](../../Resources/How-LLM-Works4.png)
 
 ---
 
 <!-- _class: image -->
-## Predicting Outputs
+
 
 ![bg contain](../../Resources/How-LLM-Works5.png)
 
@@ -406,7 +387,7 @@ Core workshop takeaway:
 
 ---
 <!-- _class: image -->
-## Responsible AI
+
 
 ![bg contain](../../Resources/Responsible-ai.png)
 
