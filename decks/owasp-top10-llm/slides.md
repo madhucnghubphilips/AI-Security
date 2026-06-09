@@ -240,6 +240,10 @@ CPU      A few powerful workers
 GPU      Thousands of small workers in parallel
 AI       Large-scale matrix math over massive data
 ```
+---
+<!-- _class: image -->
+
+![bg contain](../../Resources/GPUvsCPU_001.png)
 
 ---
 
